@@ -1,0 +1,11 @@
+<!doctype html>
+<html>
+  <head><title>LS</title></head>
+  <body>
+    <table>
+      <% for my $file ($ls->files) { %>
+      <%== $file->render_as_html($physical_folder_as_url, $controller_url) %>				     
+      <% } %>
+    </table>
+  </body>
+</html>

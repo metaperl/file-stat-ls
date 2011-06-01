@@ -1,0 +1,6 @@
+#!/bin/bash -x
+
+pushd  /home/metaperl/prg/ls-project/File-Stat-Ls-0.11
+make test; sudo make install
+popd
+./mojo.pl daemon --reload

@@ -13,6 +13,7 @@ our $VERSION = 0.12;
 my %file;
 
 has 'folder' => (is => 'rw', required => 1);
+has 'skipdotfiles' => (is => 'rw', default => 1);
 
 sub BUILD {
     my ($self)=@_;
@@ -24,14 +25,15 @@ sub files {
 
     my @object;
     for my $file (sort keys %file) {
-	my $object = $self->attr($file, $file{$file});
+	next if $self->skipdotfiles and $file =~ /^[.][.]?$/ ;
+	my $object = $self->attr($file, $file{$file}, $self->folder);
 	push @object, $object;
     }
     @object;
 }
 
 sub attr {
-    my ($self, $filename,$filestat) = @_;
+    my ($self, $filename,$filestat, $folder) = @_;
 
     my ($dev,$ino,$mode,$nlink,$uid,$gid,$rdev,$size, $atime,$mtime,$ctime,$blksize,$blocks) = @$filestat;
 
@@ -40,11 +42,13 @@ sub attr {
     my $gd = getgrgid($gid); 
     my $fm = format_mode($mode); 
     my $mt = strftime $dateformat,localtime $mtime; 
+    my $isdir = $fm =~ /^d/ ? 1 : 0 ;
     my %attr = 
 	(
 	 s => $filestat,
+	 folder => $folder,
 	 name => $filename,
-	 isdir => (-d $filename) ? 1 : 0,
+	 isdir => $isdir,
 	 formatted_mode => $fm,
 	 number_of_links => $nlink,
 	 uid => $ud,
@@ -53,6 +57,9 @@ sub attr {
 	 datetime => $mt,
 	 filename => $filename
 	);
+
+    use Data::Dumper;
+    warn Dumper(\%attr);
 
     File::Stat::Ls::Data->new(%attr);
 
