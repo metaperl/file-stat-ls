@@ -6,8 +6,16 @@ File::Stat::Ls - Perl class for converting file stat() to ls -l format
 
   use File::Stat::Ls;
 
-  my $obj = File::Stat::Ls->new;
-  my $ls = $obj->ls_stat('/my/file/name.txt');
+  my $folder = 'some-directory';
+
+  my $o = File::Stat::Ls->new(folder => $folder);
+  for my $file ($o->files) {
+    
+    # get plain-text ls format
+    print $file->render_as_text, $/;
+
+  }
+
 
 =head1 DESCRIPTION
 

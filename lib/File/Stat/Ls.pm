@@ -9,7 +9,7 @@ use POSIX qw(strftime);
 
 use File::Stat::Ls::Data;
 
-my $VERSION = 0.12;
+our $VERSION = 0.12;
 my %file;
 
 has 'folder' => (is => 'rw', required => 1);

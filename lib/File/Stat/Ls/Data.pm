@@ -30,5 +30,33 @@ sub render_as_text {
 
 }
 
+sub render_as_html {
+    my ($self)=@_;
+
+
+  my @attr = qw(	formatted_mode
+			number_of_links
+			uid
+			gid
+			size
+			datetime
+			name 
+	      );
+
+
+    my $format =<<EOFORMAT;
+<tr>
+<td>%10s</td> 
+<td align="right">%3d</td> 
+<td>%7s</td> <td>%4s</td>
+<td align="right">%12d</td> <td>%12s</td>
+<td>%-26s</td>
+</tr>
+EOFORMAT
+
+  return sprintf $format, @$self{@attr};
+
+}
+
 1;
 
