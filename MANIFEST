@@ -1,14 +1,6 @@
 .gitignore
-File-Stat-Ls-0.11.readme
-File-Stat-Ls-0.12/File-Stat-Ls-0.11.readme
-File-Stat-Ls-0.12/Makefile.PL
-File-Stat-Ls-0.12/README
-File-Stat-Ls-0.12/t/Ls.t
-File-Stat-Ls-0.12/test.pl
 lib/File/Stat/Ls.pm
-lib/File/Stat/Ls.pm~
 lib/File/Stat/Ls.pod
-lib/File/Stat/Ls.pod~
 lib/File/Stat/Ls/Data.pm
 Ls.pm
 Makefile
@@ -28,8 +20,11 @@ script/mojo/public/dl/download1.txt
 script/mojo/public/dl/download2.txt
 script/mojo/public/dl/download3.txt
 script/mojo/public/dl/newdir/newfile.txt
+script/mojo/public/dl/newdir/second-newdir/what.txt
+script/mojo/README
 script/mojo/templates/baz.html.ep
 script/re.pl
+script/wingo.bat
 t.pl
 t/Ls.t
 test.pl
