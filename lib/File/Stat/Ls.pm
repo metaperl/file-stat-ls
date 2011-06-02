@@ -14,10 +14,16 @@ my %file;
 
 has 'folder' => (is => 'rw', required => 1);
 has 'skipdotfiles' => (is => 'rw', default => 1);
+has 'onwindows' => (is => 'rw');
 
 sub BUILD {
     my ($self)=@_;
     tie %file, 'IO::Dir', $self->folder;
+
+    if ($^O =~ /Win32/) {
+	$self->onwindows(1);
+	require Win32;
+    }
 }
 
 sub files {
@@ -38,8 +44,8 @@ sub attr {
     my ($dev,$ino,$mode,$nlink,$uid,$gid,$rdev,$size, $atime,$mtime,$ctime,$blksize,$blocks) = @$filestat;
 
     my $dateformat = "%b %d  %Y";
-    my $ud = getpwuid($uid);
-    my $gd = getgrgid($gid); 
+    my $ud = $self->onwindows ? Win32::LoginName() : getpwuid($uid);
+    my $gd = $self->onwindows ? 'unknown' : getpwuid($uid);
     my $fm = format_mode($mode); 
     my $mt = strftime $dateformat,localtime $mtime; 
     my $isdir = $fm =~ /^d/ ? 1 : 0 ;
