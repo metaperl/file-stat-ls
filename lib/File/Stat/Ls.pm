@@ -69,8 +69,8 @@ sub attr {
 	 filename => $filename
 	);
 
-    use Data::Dumper;
-    warn Dumper(\%attr);
+    #use Data::Dumper;
+    #warn Dumper(\%attr);
 
     File::Stat::Ls::Data->new(%attr);
 
