@@ -182,6 +182,21 @@ It is uploaded to CPAN on 7/11/2005.
 
 07/12/2005 (htu) - added stat_attr method.
 
+=item * Version 0.12
+
+06/02/11 - (tbone)
+
+Original code would only run on unix because of use of getpwuid et al. Fixed to run on
+Windows.
+
+Moose is now a required module.
+
+script directory includes sample code for producing html and text folder listings.
+
+The API works well with Mojo. The main reason for upgrading the module was so that
+I could provide static directory listings for Mojo, hence F<script/mojo> contains
+a completely working example for L<Mojolicious>
+
 =cut
 
 =head1 SEE ALSO (some of docs that I check often)
