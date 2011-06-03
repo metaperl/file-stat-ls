@@ -14,6 +14,7 @@ BEGIN {
     $VERSION = 0.12; 
 }
 
+use autodie;
 
 my %file;
 
@@ -45,6 +46,8 @@ sub files {
 
 sub attr {
     my ($self, $filename,$filestat, $folder) = @_;
+
+    warn "FILENAME: $filename";
 
     my ($dev,$ino,$mode,$nlink,$uid,$gid,$rdev,$size, $atime,$mtime,$ctime,$blksize,$blocks) = @$filestat;
 
