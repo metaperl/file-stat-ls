@@ -5,13 +5,15 @@ use Mojolicious::Lite;
 get '/dirls'           => \&bo_action;
 get '/dirls/(*folder)' => \&bo_action;
 
+my $default = 'public';
+
 sub bo_action {
   my $self = shift;
 
   use File::Stat::Ls;
   my $physical_folder = $self->param('folder') ? $self->param('folder') : 'public';
  
-  warn "pf: $physical_folder";
+  $self->redirect_to("/dirls/$default") if $physical_folder =~ /\.\.?/;
 
   my $o = File::Stat::Ls->new(folder => $physical_folder);
   my @o = $o->files;
