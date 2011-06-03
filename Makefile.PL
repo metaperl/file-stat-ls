@@ -12,5 +12,7 @@ include 'Module::AutoInstall';
 
 # deps
 requires 'Moose';
+requires 'autodie';
+
 
 WriteAll;

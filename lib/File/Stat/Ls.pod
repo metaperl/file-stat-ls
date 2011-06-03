@@ -12,10 +12,10 @@ File::Stat::Ls - Perl class for converting file stat() to ls -l format
   for my $file ($o->files) {
     
     # get plain-text ls format
-    print $file->render_as_text, $/;
+    say $file->render_as_text;
 
     # get plain-text ls format
-    print $file->render_as_html, '<br>';
+    printf '<tr>%s</tr>', $file->render_as_html;
 
   }
 
@@ -122,11 +122,12 @@ F<script> directory includes sample code for producing html and text folder list
 
 The API works well with Mojo. The main reason for upgrading the module was so that
 I could provide static directory listings for Mojo, hence F<script/mojo> contains
-a completely working example for L<Mojolicious>
+a completely working example for L<Mojolicious>. But also see 
+L<App::DirServe|https://github.com/tempire/app-dirserve/blob/master/dirserve>. 
 
 =cut
 
-=head1 SEE ALSO (some of docs that I check often)
+=head1 SEE ALSO 
 
 L<IO::Dir> (used internally by updated version).
 

@@ -14,36 +14,27 @@ has	 datetime =>  (is => 'rw');
 
 use File::Spec;
 
+
+my @attr = qw(	formatted_mode
+		number_of_links
+		uid
+		gid
+		size
+		datetime
+		name 
+	    );
+
+
 sub render_as_text {
   my ($self)=@_;
 
-
-  my @attr = qw(	formatted_mode
-			number_of_links
-			uid
-			gid
-			size
-			datetime
-			name 
-	      );
-
-
-  my $format = "%10s %3d %7s %4s %12d %12s %-26s";  
+  my $format = "%10s %3d %7s %4s %12d %12s %-26s";
   return sprintf $format, @$self{@attr};
 
 }
 
 sub render_as_html {
   my ($self, $physical_folder, $controller_url)=@_;
-
-
-  my @attr = qw(	formatted_mode
-			number_of_links
-			uid
-			gid
-			size
-			datetime
-	      );
 
   my $filelink;
   if ($self->isdir) {
@@ -53,7 +44,6 @@ sub render_as_html {
     $filelink = sprintf '<a href="%s">%s</a>',
       make_file_url($self->folder, $self->name), $self->name;
   }
-
 
   my $format =<<EOFORMAT;
     <tr>
@@ -71,7 +61,7 @@ EOFORMAT
 
 sub folder_deconstruct {
   my($folder)=@_;
-    my @part = split qr![/\\]!, $folder;
+  my @part = split qr![/\\]!, $folder;
 }
 sub make_file_url {
   my($physical_folder, $filename)=@_;
@@ -91,10 +81,8 @@ sub make_folder_url {
     my @part = folder_deconstruct($physical_folder);
     join '/', @part;
   };
-  #warn "Formed URL: $url";
 
   "$controller_url/$url/$filename";
-
 }
 
 1;

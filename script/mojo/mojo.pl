@@ -21,7 +21,7 @@ sub bo_action {
   $self->render('webpage', ls => $o, controller_url => "/dirls", physical_folder => $physical_folder);
 };
 
-app->secret('soap'); app->start;
+app->secret('HOHOHAHAHA')->start;
 
 __DATA__
 
